@@ -1,169 +1,265 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>LungTTA Demo</title>
-
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LungTTA: Text-to-Audio Generation of Synthetic Lung Sounds for Respiratory Health</title>
   <style>
     body {
       font-family: Arial, sans-serif;
-      margin: 40px;
-      background: #f9f9f9;
+      margin: 0;
+      padding: 0;
+      background: #f7f7f7;
+      color: #222;
       line-height: 1.6;
     }
 
-    h1, h2, h3 {
-      text-align: center;
-    }
-
     .container {
-      max-width: 1000px;
-      margin: auto;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 40px 20px;
     }
 
-    .section {
-      background: white;
-      padding: 25px;
-      margin: 25px 0;
-      border-radius: 10px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    h1 {
+      text-align: center;
+      margin-bottom: 10px;
+      font-size: 2rem;
+    }
+
+    .subtitle {
+      text-align: center;
+      color: #555;
+      margin-bottom: 40px;
+      font-size: 1rem;
     }
 
     .sample {
-      margin-top: 20px;
-      padding-top: 10px;
-      border-top: 1px solid #ddd;
+      background: white;
+      border-radius: 12px;
+      padding: 25px;
+      margin-bottom: 28px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+
+    .sample h2 {
+      margin-top: 0;
+      margin-bottom: 10px;
+      font-size: 1.3rem;
+    }
+
+    .prompt {
+      margin-bottom: 20px;
+      color: #444;
+    }
+
+    .audio-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .audio-box {
+      background: #f3f3f3;
+      border-radius: 10px;
+      padding: 15px;
+    }
+
+    .audio-box h3 {
+      margin-top: 0;
+      margin-bottom: 10px;
+      font-size: 1rem;
+      text-align: center;
     }
 
     audio {
       width: 100%;
-      margin-top: 10px;
     }
 
-    a.button {
-      display: inline-block;
-      padding: 10px 20px;
-      background: #0366d6;
-      color: white;
-      text-decoration: none;
-      border-radius: 6px;
-      margin-top: 10px;
-    }
-
-    .center {
-      text-align: center;
+    @media (max-width: 900px) {
+      .audio-row {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
-
 <body>
+  <div class="container">
+    <h1>LungTTA: Text-to-Audio Generation of Synthetic Lung Sounds for Respiratory Health</h1>
 
-<div class="container">
+    <div class="sample">
+      <h2>Sample 1</h2>
+      <div class="prompt"><strong>Prompt:</strong> A cough from a 48-year-old male smoker with no asthma and no COPD</div>
+      <div class="audio-row">
+        <div class="audio-box">
+          <h3>Ground Truth</h3>
+          <audio controls>
+            <source src="audio_samples/ground_truth_sample1_ground_truth_a_cough_from_a_48-year-old_male_smoker_with_no_asthma_and_no_copd_recorded_as_a_clinical_respiratory_sample.wav" type="audio/wav">
+          </audio>
+        </div>
+        <div class="audio-box">
+          <h3>LungTTA (Ours)</h3>
+          <audio controls>
+            <source src="audio_samples/lungtta_sample1_lungtta_a_cough_from_a_48-year-old_male_smoker_with_no_asthma_and_no_copd_recorded_as_a_clinical_respiratory_sample.wav" type="audio/wav">
+          </audio>
+        </div>
+        <div class="audio-box">
+          <h3>AudioLDM2</h3>
+          <audio controls>
+            <source src="audio_samples/audioldm2_sample1_audioldm2_a_cough_from_a_48-year-old_male_smoker_with_no_asthma_and_no_copd_recorded_as_a_clinical_respiratory_sample.wav" type="audio/wav">
+          </audio>
+        </div>
+      </div>
+    </div>
 
-<h1>🔊 LungTTA</h1>
-<h3>Text-to-Audio Generation of Synthetic Lung Sounds for Respiratory Health</h3>
+    <div class="sample">
+      <h2>Sample 2</h2>
+      <div class="prompt"><strong>Prompt:</strong> A cough from a 60-year-old male smoker with possible asthma and possible COPD recorded as a clinical respiratory sample with slightly impaired airflow</div>
+      <div class="audio-row">
+        <div class="audio-box">
+          <h3>Ground Truth</h3>
+          <audio controls>
+            <source src="audio_samples/ground_truth_sample2_ground_truth_a_cough_from_a_60-year-old_male_smoker_with_possible_asthma_and_possible_copd_recorded_as_a_clinical_respiratory_sample_with_slightly_impaired_airflow.wav" type="audio/wav">
+          </audio>
+        </div>
+        <div class="audio-box">
+          <h3>LungTTA (Ours)</h3>
+          <audio controls>
+            <source src="audio_samples/lungtta_sample2_lungtta_a_cough_from_a_60-year-old_male_smoker_with_possible_asthma_and_possible_copd_recorded_as_a_clinical_respiratory_sample_with_slightly_impaired_airflow.wav" type="audio/wav">
+          </audio>
+        </div>
+        <div class="audio-box">
+          <h3>AudioLDM2</h3>
+          <audio controls>
+            <source src="audio_samples/audioldm2_sample2_audioldm2_a_cough_from_a_60-year-old_male_smoker_with_possible_asthma_and_possible_copd_recorded_as_a_clinical_respiratory_sample_with_slightly_impaired_airflow.wav" type="audio/wav">
+          </audio>
+        </div>
+      </div>
+    </div>
 
-<div class="section center">
-  <p>
-    This demo showcases synthetic respiratory audio generated using LungTTA, a diffusion-based model designed for clinically relevant lung sound synthesis.
-  </p>
+    <div class="sample">
+      <h2>Sample 3</h2>
+      <div class="prompt"><strong>Prompt:</strong> A cough from a 65-year-old male smoker with no asthma and COPD recorded as a clinical respiratory sample with reduced airflow</div>
+      <div class="audio-row">
+        <div class="audio-box">
+          <h3>Ground Truth</h3>
+          <audio controls>
+            <source src="audio_samples/ground_truth_sample3_ground_truth_a_cough_from_a_65-year-old_male_smoker_with_no_asthma_and_copd_recorded_as_a_clinical_respiratory_sample_with_reduced_airflow.wav" type="audio/wav">
+          </audio>
+        </div>
+        <div class="audio-box">
+          <h3>LungTTA (Ours)</h3>
+          <audio controls>
+            <source src="audio_samples/lungtta_sample3_lungtta_a_cough_from_a_65-year-old_male_smoker_with_no_asthma_and_copd_recorded_as_a_clinical_respiratory_sample_with_reduced_airflow.wav" type="audio/wav">
+          </audio>
+        </div>
+        <div class="audio-box">
+          <h3>AudioLDM2</h3>
+          <audio controls>
+            <source src="audio_samples/audioldm2_sample3_audioldm2_a_cough_from_a_65-year-old_male_smoker_with_no_asthma_and_copd_recorded_as_a_clinical_respiratory_sample_with_reduced_airflow.wav" type="audio/wav">
+          </audio>
+        </div>
+      </div>
+    </div>
 
-  <a class="button" href="https://github.com/MohammedMosuily/LungTTA/tree/main" target="_blank">
-    View Code on GitHub
-  </a>
-</div>
+    <div class="sample">
+      <h2>Sample 4</h2>
+      <div class="prompt"><strong>Prompt:</strong> A cough from a 73-year-old male smoker with no asthma and no COPD recorded as a clinical respiratory sample with reduced breath strength</div>
+      <div class="audio-row">
+        <div class="audio-box">
+          <h3>Ground Truth</h3>
+          <audio controls>
+            <source src="audio_samples/ground_truth_sample4_ground_truth_a_cough_from_a_73-year-old_male_smoker_with_no_asthma_and_no_copd_recorded_as_a_clinical_respiratory_sample_with_reduced_breath_strength.wav" type="audio/wav">
+          </audio>
+        </div>
+        <div class="audio-box">
+          <h3>LungTTA (Ours)</h3>
+          <audio controls>
+            <source src="audio_samples/lungtta_sample4_lungtta_a_cough_from_a_73-year-old_male_smoker_with_no_asthma_and_no_copd_recorded_as_a_clinical_respiratory_sample_with_reduced_breath_strength.wav" type="audio/wav">
+          </audio>
+        </div>
+        <div class="audio-box">
+          <h3>AudioLDM2</h3>
+          <audio controls>
+            <source src="audio_samples/audioldm2_sample4_audioldm2_a_cough_from_a_73-year-old_male_smoker_with_no_asthma_and_no_copd_recorded_as_a_clinical_respiratory_sample_with_reduced_breath_strength.wav" type="audio/wav">
+          </audio>
+        </div>
+      </div>
+    </div>
 
-<!-- ABSTRACT -->
-<div class="section">
-  <h2>Abstract</h2>
-  <p>
-    We introduce LungTTA, a text-to-audio generation framework for synthesizing clinically relevant respiratory sounds.
-    Unlike general-purpose audio generation models, LungTTA incorporates domain-specific conditioning to generate
-    coughs, breathing patterns, and vocal sounds aligned with clinical attributes such as age, smoking status,
-    and respiratory conditions. The model is based on latent diffusion and is designed to address data scarcity
-    in respiratory health applications. We evaluate LungTTA using objective metrics and human listening studies,
-    demonstrating improved realism and clinical relevance compared to existing approaches.
-  </p>
-</div>
+    <div class="sample">
+      <h2>Sample 5</h2>
+      <div class="prompt"><strong>Prompt:</strong> A cough from an 18-year-old female non-smoker with no asthma and no COPD recorded as a clinical respiratory sample</div>
+      <div class="audio-row">
+        <div class="audio-box">
+          <h3>Ground Truth</h3>
+          <audio controls>
+            <source src="audio_samples/ground_truth_sample5_ground_truth_a_cough_from_an_18-year-old_female_non-smoker_with_no_asthma_and_no_copd_recorded_as_a_clinical_respiratory_sample.wav" type="audio/wav">
+          </audio>
+        </div>
+        <div class="audio-box">
+          <h3>LungTTA (Ours)</h3>
+          <audio controls>
+            <source src="audio_samples/lungtta_sample5_lungtta_a_cough_from_an_18-year-old_female_non-smoker_with_no_asthma_and_no_copd_recorded_as_a_clinical_respiratory_sample.wav" type="audio/wav">
+          </audio>
+        </div>
+        <div class="audio-box">
+          <h3>AudioLDM2</h3>
+          <audio controls>
+            <source src="audio_samples/audioldm2_sample5_audioldm2_a_cough_from_an_18-year-old_female_non-smoker_with_no_asthma_and_no_copd_recorded_as_a_clinical_respiratory_sample.wav" type="audio/wav">
+          </audio>
+        </div>
+      </div>
+    </div>
 
-<!-- METHOD -->
-<div class="section">
-  <h2>Method Overview</h2>
-  <p>
-    LungTTA is a diffusion-based generative model conditioned on textual prompts describing patient attributes
-    and respiratory characteristics. The system integrates domain-aware conditioning and structured prompts to
-    guide the generation process toward clinically meaningful outputs. This enables controllable synthesis of
-    respiratory sounds for downstream machine learning tasks and evaluation.
-  </p>
-</div>
+    <div class="sample">
+      <h2>Sample 6</h2>
+      <div class="prompt"><strong>Prompt:</strong> A sustained a vowel sound spoken by a 24-year-old male non-smoker with no asthma and no COPD recorded as a clean clinical respiratory voice sample</div>
+      <div class="audio-row">
+        <div class="audio-box">
+          <h3>Ground Truth</h3>
+          <audio controls>
+            <source src="audio_samples/ground_truth_sample6_ground_truth_a_sustained_a_vowel_sound_spoken_by_a_24-year-old_male_non-smoker_with_no_asthma_and_no_copd_recorded_as_a_clean_clinical_respiratory_voice_sample.wav" type="audio/wav">
+          </audio>
+        </div>
+        <div class="audio-box">
+          <h3>LungTTA (Ours)</h3>
+          <audio controls>
+            <source src="audio_samples/lungtta_sample6_lungtta_a_sustained_a_vowel_sound_spoken_by_a_24-year-old_male_non-smoker_with_no_asthma_and_no_copd_recorded_as_a_clean_clinical_respiratory_voice_sample.wav" type="audio/wav">
+          </audio>
+        </div>
+        <div class="audio-box">
+          <h3>AudioLDM2</h3>
+          <audio controls>
+            <source src="audio_samples/audioldm2_sample6_audioldm2_a_sustained_a_vowel_sound_spoken_by_a_24-year-old_male_non-smoker_with_no_asthma_and_no_copd_recorded_as_a_clean_clinical_respiratory_voice_sample.wav" type="audio/wav">
+          </audio>
+        </div>
+      </div>
+    </div>
 
-<!-- AUDIO SAMPLES -->
-<div class="section">
-  <h2>Audio Samples</h2>
-
-  <!-- SAMPLE 1 -->
-  <div class="sample">
-    <h3>Sample 1</h3>
-    <p><b>Prompt:</b> A cough from a 48-year-old male smoker with no asthma and no COPD</p>
-    <audio controls src="audio_samples/lungtta_sample1_lungtta_a_cough_from_a_48-year-old_male_smoker_with_no_asthma_and_no_copd_recorded_as_a_clinical_respiratory_sample.wav"></audio>
+    <div class="sample">
+      <h2>Sample 7</h2>
+      <div class="prompt"><strong>Prompt:</strong> Shallow breathing from a 54-year-old female smoker with no asthma and no COPD recorded as a clean clinical respiratory sample</div>
+      <div class="audio-row">
+        <div class="audio-box">
+          <h3>Ground Truth</h3>
+          <audio controls>
+            <source src="audio_samples/ground_truth_sample7_ground_truth_shallow_breathing_from_a_54-year-old_female_smoker_with_no_asthma_and_no_copd_recorded_as_a_clean_clinical_respiratory_sample.wav" type="audio/wav">
+          </audio>
+        </div>
+        <div class="audio-box">
+          <h3>LungTTA (Ours)</h3>
+          <audio controls>
+            <source src="audio_samples/lungtta_sample7_lungtta_shallow_breathing_from_a_54-year-old_female_smoker_with_no_asthma_and_no_copd_recorded_as_a_clean_clinical_respiratory_sample.wav" type="audio/wav">
+          </audio>
+        </div>
+        <div class="audio-box">
+          <h3>AudioLDM2</h3>
+          <audio controls>
+            <source src="audio_samples/audioldm2_sample7_audioldm2_shallow_breathing_from_a_54-year-old_female_smoker_with_no_asthma_and_no_copd_recorded_as_a_clean_clinical_respiratory_sample.wav" type="audio/wav">
+          </audio>
+        </div>
+      </div>
+    </div>
   </div>
-
-  <!-- SAMPLE 2 -->
-  <div class="sample">
-    <h3>Sample 2</h3>
-    <p><b>Prompt:</b> A cough from a 60-year-old male smoker with possible asthma and possible COPD with slightly impaired airflow</p>
-    <audio controls src="audio_samples/lungtta_sample2_lungtta_a_cough_from_a_60-year-old_male_smoker_with_possible_asthma_and_possible_copd_recorded_as_a_clinical_respiratory_sample_with_slightly_impaired_airflow.wav"></audio>
-  </div>
-
-  <!-- SAMPLE 3 -->
-  <div class="sample">
-    <h3>Sample 3</h3>
-    <p><b>Prompt:</b> A cough from a 65-year-old male smoker with COPD with reduced airflow</p>
-    <audio controls src="audio_samples/lungtta_sample3_lungtta_a_cough_from_a_65-year-old_male_smoker_with_no_asthma_and_copd_recorded_as_a_clinical_respiratory_sample_with_reduced_airflow.wav"></audio>
-  </div>
-
-  <!-- SAMPLE 4 -->
-  <div class="sample">
-    <h3>Sample 4</h3>
-    <p><b>Prompt:</b> A cough from a 73-year-old male smoker with reduced breath strength</p>
-    <audio controls src="audio_samples/lungtta_sample4_lungtta_a_cough_from_a_73-year-old_male_smoker_with_no_asthma_and_no_copd_recorded_as_a_clinical_respiratory_sample_with_reduced_breath_strength.wav"></audio>
-  </div>
-
-  <!-- SAMPLE 5 -->
-  <div class="sample">
-    <h3>Sample 5</h3>
-    <p><b>Prompt:</b> A cough from an 18-year-old female non-smoker with no asthma and no COPD</p>
-    <audio controls src="audio_samples/lungtta_sample5_lungtta_a_cough_from_an_18-year-old_female_non-smoker_with_no_asthma_and_no_copd_recorded_as_a_clinical_respiratory_sample.wav"></audio>
-  </div>
-
-  <!-- SAMPLE 6 -->
-  <div class="sample">
-    <h3>Sample 6</h3>
-    <p><b>Prompt:</b> A sustained vowel sound spoken by a 24-year-old male non-smoker</p>
-    <audio controls src="audio_samples/lungtta_sample6_lungtta_a_sustained_a_vowel_sound_spoken_by_a_24-year-old_male_non-smoker_with_no_asthma_and_no_copd_recorded_as_a_clean_clinical_respiratory_voice_sample.wav"></audio>
-  </div>
-
-  <!-- SAMPLE 7 -->
-  <div class="sample">
-    <h3>Sample 7</h3>
-    <p><b>Prompt:</b> Shallow breathing from a 54-year-old female smoker with no asthma and no COPD</p>
-    <audio controls src="audio_samples/lungtta_sample7_lungtta_shallow_breathing_from_a_54-year-old_female_smoker_with_no_asthma_and_no_copd_recorded_as_a_clean_clinical_respiratory_sample.wav"></audio>
-  </div>
-
-</div>
-
-<!-- FOOTER -->
-<div class="section center">
-  <h3>Resources</h3>
-  <p>
-    Code, data, and additional materials are available on GitHub.
-  </p>
-  <a class="button" href="https://github.com/MohammedMosuily/LungTTA/tree/main" target="_blank">
-    Repository Link
-  </a>
-</div>
-
-</div>
-
 </body>
 </html>
